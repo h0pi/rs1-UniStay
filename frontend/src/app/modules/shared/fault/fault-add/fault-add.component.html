@@ -1,0 +1,37 @@
+<div class="fault-add-container" *ngIf="!loading; else loadingTpl">
+  <h2>{{ isAddMode ? 'Edit fault' : 'Add new fault' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Fault name</label>
+      <input type="text" formControlName="title" />
+      <small *ngIf="form.get('title')?.invalid && form.get('title')?.touched">Required field</small>
+    </div>
+
+    <input type="hidden" formControlName="reportedBy">
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea formControlName="description" rows="3"></textarea>
+      <small *ngIf="form.get('description')?.invalid && form.get('description')?.touched">Description must have at leat 10 characters.</small>
+    </div>
+
+
+<div class="room-select">
+    <label class="room">Room</label>
+<select formControlName="roomID">
+  <option value="">-- Select room --</option>
+  <option *ngFor="let room of rooms" [value]="room.roomID">
+    {{ room.roomNumber }}   
+  </option>
+</select>
+</div>
+    <button type="submit" [disabled]="loading">
+      {{ isAddMode ? 'Save changes' : 'Add fault' }}
+    </button>
+  </form>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading...</div>
+</ng-template>

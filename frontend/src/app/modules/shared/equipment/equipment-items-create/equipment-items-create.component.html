@@ -1,0 +1,11 @@
+<h2>Add Equipment Item</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+
+  <label>Serial Number:</label>
+  <input type="text" formControlName="serialNumber" />
+  <br />
+
+  <button type="submit">Save Item</button>
+  <button type="button" (click)="router.navigate(['/equipment', equipmentId, 'items'])">Cancel</button>
+</form>

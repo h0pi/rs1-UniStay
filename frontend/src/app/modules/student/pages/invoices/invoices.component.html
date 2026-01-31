@@ -1,0 +1,115 @@
+<div class="invoices-container">
+  <div class="invoices-header">
+    <h1>
+      <i class="fa-solid fa-file-invoice-dollar"></i>My Invoices
+    </h1>
+    <div class="header-controls">
+      <input type="text" placeholder="Search invoices..." class="search-input">
+      <button class="filter-button">
+        <i class="fa-solid fa-filter"></i>Filter by Status
+      </button>
+    </div>
+  </div>
+
+  <div class="invoices-table-card">
+    <div class="table-wrapper">
+      <table class="invoices-table">
+        <thead>
+        <tr>
+          <th>Invoice #</th>
+          <th>Date</th>
+          <th>Total Amount</th>
+          <th class="text-center">Status</th>
+          <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (invoice of invoices(); track invoice.invoiceID) {
+            <tr>
+              <td class="invoice-id">{{ invoice.invoiceID }}</td>
+
+
+              <td>{{ invoice.issuedAt ? 'Issued' : 'Not issued' }}</td>
+
+
+              <td class="amount">${{ invoice.totalAmount.toFixed(2) }}</td>
+
+              <td class="status-cell">
+                <span
+                  class="status-badge"
+                  [ngClass]="{
+                    'paid': invoice.paid,
+                    'unpaid': !invoice.paid
+                  }"
+                >
+                  @if (invoice.paid) {
+                    <i class="fa-solid fa-check-circle"></i>
+                  } @else {
+                    <i class="fa-solid fa-exclamation-circle"></i>
+                  }
+                  {{ invoice.paid ? 'Paid' : 'Unpaid' }}
+                </span>
+              </td>
+
+              <td class="actions-cell">
+                @if (!invoice.paid) {
+                  <button
+                    (click)="payInvoice(invoice.invoiceID)"
+                    class="pay-button"
+                  >
+                    Pay Now
+                  </button>
+                } @else {
+                  <button
+                    (click)="downloadInvoice(invoice.invoiceID)"
+                    class="pay-button"
+                  >
+                    Get PDF
+                  </button>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="table-pagination">
+      <div class="pagination-summary">
+        <span>Showing 1 to {{invoices().length}} of {{invoices().length}} entries</span>
+      </div>
+      <div class="pagination-controls">
+        <button class="pagination-button" disabled>&lt; Previous</button>
+        <span class="pagination-current-page">1</span>
+        <button class="pagination-button" disabled>Next &gt;</button>
+      </div>
+    </div>
+  </div>
+</div>
+@if (showPayment) {
+  <!-- OVERLAY -->
+  <div class="stripe-overlay" (click)="closePayment()">
+
+    <!-- MODAL -->
+    <div class="stripe-modal" (click)="$event.stopPropagation()">
+      <h2>
+        <i class="fa-solid fa-credit-card"></i>
+        Pay invoice
+      </h2>
+
+      <div class="stripe-card-wrapper">
+        <div #cardElement></div>
+      </div>
+
+      <div class="stripe-actions">
+        <button class="confirm-button" (click)="confirmPayment()">
+          Confirm payment
+        </button>
+
+        <button class="cancel-button" (click)="closePayment()">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+  </div>
+}

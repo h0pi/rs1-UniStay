@@ -1,0 +1,50 @@
+<!-- src/app/modules/shared/fault/fault-list/fault-list.component.html -->
+<div class="fault-list-container" *ngIf="!loading; else loadingTpl">
+  <h2>Lista kvarova</h2>
+
+  <div class="filters">
+    <input placeholder="Title" [(ngModel)]="filters.title" (input)="applyFilters()" />
+    <input placeholder="ReportedByUserID" [(ngModel)]="filters.reportedByUserID" (input)="applyFilters()" />
+    <select [(ngModel)]="filters.isResolved" (change)="applyFilters()">
+      <option value="">Svi</option>
+      <option [value]="true">Riješeni</option>
+      <option [value]="false">Neriješeni</option>
+    </select>
+    <input type="date" [(ngModel)]="filters.from" (change)="applyFilters()" />
+    <input type="date" [(ngModel)]="filters.to" (change)="applyFilters()" />
+    <button (click)="clearFilters()">Reset</button>
+    <!--<button (click)="addFault()">Uredi kvar</button>-->
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>ReportedBy</th>
+        <th>Description</th>
+        <th>IsResolved</th>
+        <th>ReportedAt</th>
+        <th>ResolvedAt</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let f of filteredFaults">
+        <td>{{ f.title }}</td>
+        <td>{{ f.reportedByName || f.reportedByUserID }}</td>
+        <td>{{ f.description }}</td>
+        <td>{{ f.isResolved ? 'Yes' : 'No' }}</td>
+        <td>{{ f.reportedAt | date:'short' }}</td>
+        <td>{{ f.resolvedAt ? (f.resolvedAt | date:'short') : '-' }}</td>
+        <td>
+          <button (click)="updateFault(f.faultID)">Uredi</button>
+          <button (click)="deleteFault(f.faultID)">Obriši</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Učitavanje...</div>
+</ng-template>

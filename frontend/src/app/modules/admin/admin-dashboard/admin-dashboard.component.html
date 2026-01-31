@@ -1,0 +1,14 @@
+<div style="display:flex; justify-content:flex-end; padding:10px;">
+  <button (click)="logout()" class="btn btn-outline-danger">Odjavi se</button>
+</div>
+
+<button class="btn btn-primary" routerLink="/admin/hall/hall-list">Hall list</button>
+<button class="btn btn-success" routerLink="/admin/hall/hall-add">Add hall</button>
+
+<button class="btnn btn-primary" routerLink="/admin/fault/fault-list">Fault list</button>
+<button class="btnn btn-success" routerLink="/admin/fault/fault-add">Add fault</button>
+
+<button class="btnnn btn-primary" routerLink="/admin/equipment/equipment-list">Equipment list</button>
+<button class="btnnn btn-success" routerLink="/admin/equipment/equipment-add">Add equipment</button>
+
+<router-outlet></router-outlet>

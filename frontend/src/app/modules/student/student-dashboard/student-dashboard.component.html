@@ -1,0 +1,88 @@
+ <!--<router-outlet></router-outlet>
+<div style="display: flex; justify-content: flex-end; padding: 10px;">
+  <button (click)="logout()" class="btn btn-outline-danger">
+    🚪 Odjavi se
+  </button>
+</div>-->
+
+ <div class="student-layout-container">
+   <!-- Sidebar -->
+   <aside class="sidebar">
+     <div class="sidebar-header">
+       <h1>
+         UniStay
+       </h1>
+     </div>
+     <div class="sidebar-content">
+       <div class="user-profile" *ngIf="user$ | async as user">
+         <img src="https://picsum.photos/seed/student/40/40" alt="Student Avatar" class="user-avatar">
+         <div class="user-info">
+           <p>{{ user.firstName }} {{ user.lastName }}</p>
+           <span>Student</span>
+         </div>
+       </div>
+       <nav class="main-nav">
+         <a class="nav-item" routerLink="dashboard" routerLinkActive="active">
+           <i class="fa-solid fa-table-columns"></i>
+           <span>Dashboard</span>
+         </a>
+
+         <a [routerLink] = "['invoices']" class="nav-item">
+           <i class="fa-solid fa-file-invoice-dollar"></i>
+           <span>Invoices</span>
+         </a>
+
+         <a class="nav-item" routerLink="payments" routerLinkActive="active">
+           <i class="fa-solid fa-clock-rotate-left"></i>
+           <span>Payments</span>
+         </a>
+
+         <a class="nav-item" routerLink="profile" routerLinkActive="active">
+           <i class="fa-solid fa-user"></i>
+           <span>Profile</span>
+         </a>
+         <!--@for (item of navItems(); track item.path) {
+           <a class="nav-item"
+              [routerLink]="item.path"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}">
+             <i [class]="item.icon"></i>
+             <span>{{ item.label }}</span>
+           </a>
+         }-->
+       </nav>
+     </div>
+     <div class="sidebar-footer">
+       <a (click)="logout()" href="#" class="logout-button">
+         <i class="fa-solid fa-arrow-right-from-bracket"></i>
+         <span>Log Out</span>
+       </a>
+       <!--
+       <div style="display: flex; justify-content: flex-end; padding: 10px;">
+         <button (click)="logout()" class="btn btn-outline-danger">
+           🚪 Odjavi se
+         </button>
+       </div>
+       -->
+     </div>
+   </aside>
+
+   <!-- Main Content -->
+   <main class="main-content">
+     <header class="content-header">
+       <h2>Student Dashboard</h2>
+       <div class="header-actions">
+         <button>
+           <i class="fa-regular fa-bell"></i>
+         </button>
+         <button>
+           <i class="fa-regular fa-envelope"></i>
+         </button>
+       </div>
+     </header>
+     <div class="content-area">
+       <router-outlet></router-outlet>
+     </div>
+   </main>
+ </div>
+

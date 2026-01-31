@@ -1,0 +1,53 @@
+<h1 style="color:red;font-size:40px;">TEST HALL LIST</h1>
+
+<div class="hall-list-container" *ngIf="!loading; else loadingTpl">
+  <h2>Hall list</h2>
+
+  <div class="filters">
+    <input placeholder="Name" [(ngModel)]="filters.name" (input)="applyFilters()" />
+    <input type="number" placeholder="Capacity ≥" [(ngModel)]="filters.capacity" (input)="applyFilters()" />
+    <select [(ngModel)]="filters.isAvailable" (change)="applyFilters()">
+      <option value="">All</option>
+      <option value="true">Available</option>
+      <option value="false">Occupied</option>
+    </select>
+    <input type="date" [(ngModel)]="filters.availableFrom" (change)="applyFilters()" />
+    <input type="date" [(ngModel)]="filters.availableTo" (change)="applyFilters()" />
+
+    <button (click)="clearFilters()">Refresh filter</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Capacity</th>
+        <th>Available from</th>
+        <th>Available until</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hall of filteredHalls">
+        <td>{{ hall.name }}</td>
+        <td>{{ hall.capacity }}</td>
+        <td>{{ hall.availableFrom | date: 'shortDate' }}</td>
+        <td>{{ hall.availableTo | date: 'shortDate' }}</td>
+        <td>
+          <span [class.available]="hall.isAvailable" [class.unavailable]="!hall.isAvailable">
+            {{ hall.isAvailable ? 'Available' : 'Occupied' }}
+          </span>
+        </td>
+        <td>
+          <button (click)="updateHall(hall.hallID)">Edit</button>
+          <button (click)="deleteHall(hall.hallID)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading...</div>
+</ng-template>

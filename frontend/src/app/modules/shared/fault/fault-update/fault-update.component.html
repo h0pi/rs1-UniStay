@@ -1,0 +1,27 @@
+<!-- src/app/modules/shared/fault/fault-update/fault-update.component.html -->
+<h2>{{ isEdit ? 'Uredi kvar' : 'Dodaj kvar' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="saveFault()">
+  <label>Title</label>
+  <input type="text" formControlName="title" />
+  <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched">Required</div>
+
+  <label>Description</label>
+  <textarea formControlName="description"></textarea>
+
+  <label>Status</label>
+  <textarea formControlName="status"></textarea>
+
+  <label>Priority</label>
+  <input type="text" formControlName="priority" />
+  
+  <!--<label>IsResolved</label>
+  <input type="checkbox" formControlName="isResolved" />-->
+
+  <label>ResolvedAt</label>
+  <input type="date" formControlName="resolvedAt" />
+
+  <br/>
+  <button type="submit">Spasi</button>
+  <button type="button" (click)="back()">Nazad</button>
+</form>

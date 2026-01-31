@@ -1,0 +1,16 @@
+<div>
+  <h3>Two Factor Authentication (email codes)</h3>
+  <p *ngIf="!enabled">2FA is currently <b>disabled</b>.</p>
+  <p *ngIf="enabled">2FA is <b>enabled</b>.</p>
+
+  <button (click)="enable()" *ngIf="!enabled">Enable 2FA</button>
+  <button (click)="disable()" *ngIf="enabled">Disable 2FA</button>
+
+  <div *ngIf="backupCodes.length">
+    <h4>Backup codes (save them!)</h4>
+    <ul><li *ngFor="let c of backupCodes">{{c}}</li></ul>
+  </div>
+
+  <hr/>
+  <button (click)="sendTestCode()">Send test code to my email</button>
+</div>

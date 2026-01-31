@@ -1,0 +1,73 @@
+<div class="chat-container">
+
+  <!-- LEFT PANEL -->
+  <div class="chat-list">
+  <input
+    type="text"
+    placeholder="Search users..."
+    [(ngModel)]="search"
+    (input)="searchNewUsers()" 
+    class="search-input"
+  />
+
+  <div *ngIf="search.length > 0" class="search-results">
+    <div *ngFor="let u of searchResults" (click)="startNewChat(u)" class="chat-user result">
+      {{ u.displayName }} (new)
+    </div>
+  </div>
+
+  <hr>
+
+  <div
+    class="chat-user"
+    *ngFor="let c of conversations"
+    (click)="openConversation(c)"
+    [class.active]="c.userId === receiverId"
+  >
+    <div class="username">{{ c.displayName }}</div> </div>
+</div>
+
+  <!-- RIGHT PANEL -->
+  <div class="chat-window" *ngIf="receiverId; else noChat">
+    <div class="chat-header">
+      Chat with {{ activeUserName }}
+    </div>
+
+    <div class="messages">
+      <div
+        *ngFor="let m of messages"
+        [class.me]="m.senderId === senderId"
+        class="message"
+      >
+        <div class="sender-name" *ngIf="m.senderId !==senderId">
+          {{m.senderName}}
+        </div>
+        <div class="message-content">
+          {{m.content}}
+        </div>
+      </div>
+    </div>
+
+      <div class="typing-indicator" *ngIf="isTyping">
+    {{activeUserName}} is typing...
+  </div>
+
+    <div class="chat-input">
+      <input
+        [(ngModel)]="message"
+        placeholder="Type a message..."
+        (input)="onTyping()"
+      />
+      <button (click)="send()">Send</button>
+    </div>
+  </div>
+
+
+
+  <ng-template #noChat>
+    <div class="empty-chat">
+      Select a conversation
+    </div>
+  </ng-template>
+
+</div>

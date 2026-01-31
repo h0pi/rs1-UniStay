@@ -1,0 +1,31 @@
+<h2>Edit hall</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<form *ngIf="!loading" (ngSubmit)="saveHall()">
+
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="hall.name" name="name" required />
+
+  <label>Capacity:</label>
+  <input type="number" [(ngModel)]="hall.capacity" name="capacity" required />
+
+  <label>Description:</label>
+  <textarea [(ngModel)]="hall.description" name="description"></textarea>
+
+  <label>Available from:</label>
+  <input type="date" [(ngModel)]="hall.availableFrom" name="availableFrom"/>
+
+  <label>Available until:</label>
+  <input type="date" [(ngModel)]="hall.availableTo" name="availableTo"/>
+
+  <label>Status:</label>
+  <select [(ngModel)]="hall.isAvailable" name="isAvailable">
+    <option [value]="true">Available</option>
+    <option [value]="false">Occupied</option>
+  </select>
+
+  <br/><br/>
+  <button type="submit">Save</button>
+  <button type="button" (click)="back()">Back</button>
+</form>

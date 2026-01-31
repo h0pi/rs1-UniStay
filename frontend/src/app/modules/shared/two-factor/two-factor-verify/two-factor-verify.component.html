@@ -1,0 +1,7 @@
+<div>
+  <h3>Enter verification code</h3>
+  <p>We sent a code to your registered email.</p>
+  <input [(ngModel)]="code" placeholder="6-digit code or backup code" />
+  <button (click)="verify()">Verify</button>
+  <button (click)="resend()">Resend</button>
+</div>

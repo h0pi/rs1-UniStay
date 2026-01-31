@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>Name</label>
+  <input formControlName="name" />
+  <label>Type</label>
+  <input formControlName="equipmentType" />
+  <label>Quantity</label>
+  <input type="number" formControlName="quantity" />
+  <label>AvailableQuantity</label>
+  <input type="number" formControlName="availableQuantity" />
+  <label>RentalPrice</label>
+  <input formControlName="rentalPrice" />
+  <label>Description</label>
+  <textarea formControlName="description"></textarea>
+  <button type="submit">{{ isEdit ? 'Save' : 'Add' }}</button>
+</form>

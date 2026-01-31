@@ -1,0 +1,69 @@
+<h2>{{equipmentName}} items</h2>
+
+<button class="add-btn" (click)="addNewItem()">Add New Item</button>
+
+<table class="eq-table">
+  <thead>
+    <tr>
+      <th>Serial</th>
+      <th>Assigned At</th>
+      <th>Return At</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.serialNumber }}</td>
+      <td>{{ item.assignedAt ? (item.assignedAt | date:'short') : '-' }}</td>
+      <td>{{ item.returnedAt ? (item.returnedAt | date:'short') : '-' }}</td>
+      <td>{{ item.location || '-' }}</td>
+
+      <td>
+        <span [class.available]="item.isAvailable" [class.taken]="!item.isAvailable">
+          {{ item.isAvailable ? 'Available' : 'Taken' }}
+        </span>
+      </td>
+      <td>
+        <button class="delete-btn" (click)="delete(item.recordID)">Delete</button>
+      </td>
+
+      <td>
+        <button *ngIf="item.isAvailable"
+                class="take-btn"
+                (click)="openAssignModal(item)">
+            Assign
+        </button>
+
+        <button *ngIf="!item.isAvailable"
+                class="release-btn"
+                (click)="releaseItem(item)">
+            Release
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="showModal">
+  <div class="modal-box">
+    <h3>Assign equipment</h3>
+
+    <label>Date assigned:</label>
+    <input type="date" [(ngModel)]="modalData.assignedAt" />
+
+    <label>Return date:</label>
+    <input type="date" [(ngModel)]="modalData.returnedAt" />
+
+    <label>Location:</label>
+    <input type="text" [(ngModel)]="modalData.location" />
+
+    <div class="modal-actions">
+      <button (click)="confirmAssign()">Confirm</button>
+      <button class="cancel" (click)="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>

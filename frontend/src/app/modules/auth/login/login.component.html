@@ -1,0 +1,33 @@
+<div class="login-container">
+  <h2>Login</h2>
+
+  <form (ngSubmit)="onLogin()" [formGroup]="form">
+
+    <app-my-input-text
+      [myLabel]="'Email'"
+      [myPlaceholder]="'Unesite email'"
+      myControlName="email"
+    ></app-my-input-text>
+
+    <app-my-input-text
+      [myLabel]="'Password'"
+      [myPlaceholder]="'Unesite lozinku'"
+      [myType]="MyInputTextType.Password"
+      myControlName="password"
+    ></app-my-input-text>
+
+    <mat-slide-toggle formControlName="rememberMe">
+      Keep me logged in
+    </mat-slide-toggle>
+
+
+
+    <button class="btnLogin" type="submit"
+            style="background-color:blue; color:white; font-size: larger; border-color:blue; padding-left: 20px;padding-right:20px">
+      Log in
+    </button>
+
+    <label (click)="passwordRecovery()" style="text-align:center; margin-top:10px;">Forgot password?</label>
+
+  </form>
+</div>

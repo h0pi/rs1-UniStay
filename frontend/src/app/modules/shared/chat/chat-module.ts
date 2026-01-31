@@ -1,0 +1,22 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChatComponent } from './chat-component/chat.component';
+import { ChatRoutingModule } from './chat-routing.module';
+import { RouterModule } from '@angular/router';
+
+
+@NgModule({
+  declarations: [ChatComponent],
+  imports: [
+    CommonModule,   // ✔ omogućava *ngFor, *ngIf, itd.
+    FormsModule ,    // ✔ omogućava [(ngModel)]
+    ChatRoutingModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  exports:[
+    ChatComponent
+  ]
+})
+export class ChatModule {}

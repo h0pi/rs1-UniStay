@@ -1,0 +1,39 @@
+h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+form {
+  max-width: 500px;
+}
+
+.pair {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+input, select {
+  padding: 8px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.save-btn {
+  padding: 10px 15px;
+  border: none;
+  background: #1976d2;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: #125ca1;
+  }
+}

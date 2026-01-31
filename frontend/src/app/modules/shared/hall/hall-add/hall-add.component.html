@@ -1,0 +1,50 @@
+<div class="hall-add-container" *ngIf="!loading; else loadingTpl">
+  <h2>{{ isAddMode ? 'Edit hall' : 'Add new hall' }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Hall name</label>
+      <input type="text" formControlName="name" />
+      <small *ngIf="form.get('name')?.invalid && form.get('name')?.touched">Required field</small>
+    </div>
+
+    <div class="form-group">
+      <label>Capacity</label>
+      <input type="number" formControlName="capacity" />
+      <small *ngIf="form.get('capacity')?.invalid && form.get('capacity')?.touched">Enter a value grater than 0</small>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea formControlName="description" rows="3"></textarea>
+      <small *ngIf="form.get('description')?.invalid && form.get('description')?.touched">Description must have at leat 10 characters.</small>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Available from</label>
+        <input type="date" formControlName="availableFrom" />
+      </div>
+
+      <div class="form-group">
+        <label>Available until</label>
+        <input type="date" formControlName="availableTo" />
+      </div>
+    </div>
+
+    <div class="form-group checkbox">
+      <label>
+        <input type="checkbox" formControlName="isAvailable" />
+        Available
+      </label>
+    </div>
+
+    <button type="submit" [disabled]="loading">
+      {{ isAddMode ? 'Save changes' : 'Add hall' }}
+    </button>
+  </form>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading...</div>
+</ng-template>

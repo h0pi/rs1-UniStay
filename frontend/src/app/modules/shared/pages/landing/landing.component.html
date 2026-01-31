@@ -1,0 +1,84 @@
+<app-header></app-header>
+<div class="landing-page animate-fade-in">
+  <!-- Hero Section -->
+  <section class="hero" appAnimateOnScroll>
+    <img src="/images/college-dormitory.avif" alt="University campus background" class="hero__background-image">
+    <div class="hero__content">
+      <h1 class="hero__title">Welcome to UniStay</h1>
+      <p class="hero__subtitle">Your Home Away From Home. Simplified.</p>
+      <a href="#features" class="hero__cta">
+        Get Started
+      </a>
+    </div>
+  </section>
+
+  <!-- Announcements Section -->
+  <section id="announcements" class="announcements" appAnimateOnScroll>
+    <div class="announcements__container">
+      <h2 class="section-title">Latest Announcements</h2>
+      <p class="section-subtitle">Stay up to date with the latest news and important information from UniStay.</p>
+      <div class="announcements__slider">
+        <!-- Previous Button -->
+        <button (click)="prevAnnouncement()" aria-label="Previous announcement" class="slider-button slider-button--prev">
+          <svg xmlns="http://www.w3.org/2000/svg" class="slider-button__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <!-- Announcement Card Wrapper -->
+        <div class="announcements__card-wrapper">
+          @for (announcement of visibleAnnouncement(); track announcement.title) {
+            <div class="announcement-card animate-fade-in">
+              <p class="announcement-card__date">{{ announcement.date }}</p>
+              <h3 class="announcement-card__title">{{ announcement.title }}</h3>
+              <p class="announcement-card__content">{{ announcement.content }}</p>
+            </div>
+          }
+        </div>
+
+        <!-- Next Button -->
+        <button (click)="nextAnnouncement()" aria-label="Next announcement" class="slider-button slider-button--next">
+          <svg xmlns="http://www.w3.org/2000/svg" class="slider-button__icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about" appAnimateOnScroll>
+    <div class="about__container">
+      <div class="about__content">
+        <h2 class="section-title">What is UniStay?</h2>
+        <p class="about__text">
+          UniStay is a comprehensive dormitory management system designed to streamline every aspect of student housing. From room selection and booking to maintenance requests and community announcements, we provide a seamless digital experience for both students and administrators.
+        </p>
+        <p class="about__text">
+          Our mission is to create a comfortable, safe, and efficient living environment, allowing students to focus on their studies and enjoy their university life to the fullest.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features" appAnimateOnScroll>
+    <div class="features__container">
+      <h2 class="section-title">Our Key Features</h2>
+      <p class="section-subtitle">Everything you need for a hassle-free dormitory experience.</p>
+      <div class="features__grid">
+        @for (feature of features; track feature.title) {
+          <div class="feature-card" [style.background-image]="'url(' + feature.imageUrl + ')'">
+            <div class="feature-card__overlay"></div>
+            <div class="feature-card__content">
+              <div class="feature-card__icon-wrapper" [innerHTML]="feature.icon"></div>
+              <h3 class="feature-card__title">{{ feature.title }}</h3>
+              <p class="feature-card__description">{{ feature.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

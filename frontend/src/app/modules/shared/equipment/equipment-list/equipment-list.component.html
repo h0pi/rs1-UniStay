@@ -1,0 +1,46 @@
+<h1 style="color:red;font-size:40px;">TEST EQUIPMENT LIST</h1>
+
+<div class="equipment-list-container" *ngIf="!loading; else loadingTpl">
+  <h2>Equipment list</h2>
+
+  <div class="filters">
+    <input placeholder="Name" [(ngModel)]="filters.name" (input)="applyFilters()" />
+    <input placeholder="Type" [(ngModel)]="filters.type" (input)="applyFilters()" />
+
+
+
+    <button (click)="clearFilters()">Refresh filter</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>AvailableQuantity</th>
+        <th>RentalPrice</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let equipment of filteredEquipment">
+        <td (click)="openItems(equipment.equipmentID)" style="cursor:pointer;">{{ equipment.name }}</td>
+        <td>{{ equipment.equipmentType }}</td>
+        <td>{{ equipment.description }}</td>
+        <td>{{ equipment.quantity }}</td>
+        <td>{{ equipment.availableQuantity }}</td>
+        <td>{{ equipment.rentalPrice }}</td>
+        <td>
+          <button (click)="updateEquipment(equipment.equipmentID)">Edit</button>
+          <button (click)="deleteEquipment(equipment.equipmentID)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading">Loading...</div>
+</ng-template>

@@ -1,0 +1,20 @@
+<h2>Edit Equipment Item</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="save()">
+
+  <label>Serial number:</label>
+  <input type="text" formControlName="serialNumber" />
+
+  <label>Available:</label>
+  <select formControlName="isAvailable">
+    <option [value]="true">Yes</option>
+    <option [value]="false">No</option>
+  </select>
+
+  <br /><br />
+  <button type="submit">Save</button>
+  <button type="button" (click)="router.navigate(['/equipment'])">Back</button>
+
+</form>

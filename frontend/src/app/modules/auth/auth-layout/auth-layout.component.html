@@ -1,0 +1,41 @@
+<div>
+<div *ngIf="!isLoginPage" style="display:flex; justify-content:flex-end; padding:10px;">
+  <button (click)="logout()" class="btnLogout">Logout</button>
+</div>
+
+<button *ngIf="(userRole === 'employee' || userRole === 'administrator') && !isLoginPage"
+        (click)="openHallList()">
+  Hall list
+</button>
+<button *ngIf="(userRole === 'employee' || userRole === 'administrator') && !isLoginPage "
+        (click)="openHallAdd()">
+  Add hall
+</button>
+
+<button *ngIf="(userRole === 'employee' || userRole === 'administrator') && !isLoginPage"
+        (click)="openFaultList()">
+  Fault list
+</button>
+<button *ngIf="(userRole === 'employee' || userRole === 'administrator') && !isLoginPage"
+        (click)="openFaultAdd()">
+  Add fault
+</button>
+<button *ngIf="(userRole === 'employee' || userRole === 'administrator') && !isLoginPage"
+        (click)="openEquipmentList()">
+  Equipment list
+</button>
+<button *ngIf="(userRole === 'employee' || userRole === 'administrator') && !isLoginPage"
+        (click)="openEquipmentAdd()">
+  Add equipment
+</button>
+
+<button *ngIf="!isLoginPage" (click)="openChat()">Chat</button>
+
+<button *ngIf="(userRole === 'employee' || userRole === 'administrator') && !isLoginPage"
+        (click)="analyticsDashboard()">
+  Analytics
+</button>
+
+
+<router-outlet></router-outlet>
+</div>

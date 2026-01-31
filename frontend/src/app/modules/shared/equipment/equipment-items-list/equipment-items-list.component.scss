@@ -1,0 +1,68 @@
+.eq-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background: #f5f5f5;
+    text-align: left;
+  }
+}
+
+.available {
+  color: green;
+  font-weight: bold;
+}
+.taken {
+  color: red;
+  font-weight: bold;
+}
+
+.take-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.release-btn {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  width: 350px;
+  border-radius: 8px;
+}
+
+.modal-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel {
+  background: #999;
+}
